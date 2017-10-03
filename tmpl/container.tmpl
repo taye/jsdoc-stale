@@ -53,15 +53,15 @@
     <?js } else if (doc.kind === 'class') { ?>
         <?js= self.partial('method.tmpl', doc) ?>
     <?js } else { ?>
-        <?js if (doc.examples && doc.examples.length) { ?>
-            <?js= self.partial('examples.tmpl', doc.examples) ?>
-        <?js } ?>
-
         <?js if (doc.description) { ?>
             <div class="description"><?js= doc.description ?></div>
         <?js } ?>
 
         <?js= self.partial('details.tmpl', doc) ?>
+
+        <?js if (doc.examples && doc.examples.length) { ?>
+            <?js= self.partial('examples.tmpl', doc.examples) ?>
+        <?js } ?>
     <?js } ?>
     </div>
 
