@@ -1,5 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,500i,500,600,600i|Roboto);
 
+$grid: 4px;
+$nav-width: 60 * $grid;
+
 * {
   box-sizing: border-box;
 }
@@ -12,7 +15,7 @@ html {
 body {
   height: 100%;
   width: 100%;
-  color: #4d4e53;
+  color: #333;
   background-color: white;
   margin: 0 auto;
   padding: 0;
@@ -85,7 +88,7 @@ h3 {
 h4 {
   font-size: 18px;
   margin: 1em 0 .2em;
-  color: #4d4e53;
+  color: #333;
 
   /* border-bottom: 1px solid #eee; */
   padding-bottom: 8px;
@@ -118,7 +121,7 @@ blockquote {
   border-left: 4px solid #eee;
   margin: 0;
   padding-left: 1em;
-  color: #888;
+  color: #eee;
 }
 
 .class-description {
@@ -137,8 +140,14 @@ blockquote {
 #main {
   float: right;
   min-width: 360px;
-  width: calc(100% - 250px);
-  padding: 0 30px 20px 30px;
+  width: calc(100% - #{$nav-width});
+  padding: 0;
+  min-width: initial;
+
+  > *:not(section) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 
 header {
@@ -235,8 +244,9 @@ section {
 nav {
   float: left;
   display: block;
-  width: 250px;
-  background: #fff;
+  width: $nav-width;
+  background: #333;
+  color: #eee;
   overflow: auto;
   position: fixed;
   height: 100%;
@@ -257,7 +267,7 @@ nav {
   font-weight: bold;
 
   a {
-    color: #888;
+    color: #eee;
     font-size: 14px;
     display: inline-block;
   }
@@ -274,6 +284,16 @@ nav {
   font-weight: bold;
   line-height: 20px;
   font-size: 13px;
+}
+
+.nav-item {
+  margin-left: 3 * $grid;
+}
+
+.nav-item-name a {
+  &, &:visited, &:hover {
+    color: #eee;
+  }
 }
 
 .type-function {
@@ -300,7 +320,7 @@ nav {
 
 footer {
   color: hsl(0, 0%, 28%);
-  margin-left: 250px;
+  margin-left: $nav-width;
   display: block;
   padding: 30px;
   font-style: italic;
@@ -397,7 +417,7 @@ footer {
     font-size: 12px;
     line-height: 18px;
     display: block;
-    background-color: #fff;
+    background-color: #eee;
     color: #4D4E53;
 
     &:empty:before {
@@ -509,12 +529,12 @@ footer {
   font-weight: bold;
 }
 
-.params td.description > p:first-child, .props td.description > p:first-child {
+.params param-description > p:first-child, .props param-description > p:first-child {
   margin-top: 0;
   padding-top: 0;
 }
 
-.params td.description > p:last-child, .props td.description > p:last-child {
+.params param-description > p:last-child, .props param-description > p:last-child {
   margin-bottom: 0;
   padding-bottom: 0;
 }
@@ -551,7 +571,6 @@ dl.param-type {
   display: none;
   position: relative;
   padding: 2.0625rem 1.5rem;
-  transition: 0.25s;
   cursor: pointer;
   user-select: none;
   opacity: .8;
@@ -697,13 +716,13 @@ dl.param-type {
 
   nav {
     background: #FFF;
-    width: 250px;
+    width: $nav-width;
     height: 100%;
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
-    left: -250px;
+    left: -$nav-width;
     z-index: 3;
     padding: 0 10px;
     transition: left 0.2s;
@@ -746,20 +765,11 @@ dl.param-type {
   }
 }
 
-/* additions to minami css */
-
-#main {
-  padding-left: 0;
-  padding-right: 0;
-  min-width: initial;
-
-  > *:not(section) {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-}
-
-section > header, .subsection-title, .section-method > *:not(.params):not(.description):not(.prettyprint), .description > *:not(.prettyprint), footer {
+section > header,
+.subsection-title,
+.section-method > *:not(.params):not(.description):not(.prettyprint),
+.description > *:not(.prettyprint),
+footer {
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -778,12 +788,18 @@ table.params {
   border: none;
   border-radius: 0;
   width: 100%;
+  background-color: #292929;
+  color: #c5c8c6;
+  border-radius: 0;
 
   > code {
     position: relative;
     border: none;
     border-radius: 0;
     width: 100%;
+    background-color: #292929;
+    color: #c5c8c6;
+    border-radius: 0;
   }
 }
 
@@ -792,28 +808,9 @@ table.params {
   border: none;
   border-radius: 0;
   width: 100%;
-}
-
-.prettyprint {
   background-color: #292929;
   color: #c5c8c6;
   border-radius: 0;
-
-  code {
-    background-color: #292929;
-    color: #c5c8c6;
-    border-radius: 0;
-  }
-}
-
-#main blockquote {
-  background-color: #292929;
-  color: #c5c8c6;
-  border-radius: 0;
-}
-
-.navicon, .navicon-button {
-  transition: none;
 }
 
 @media only screen and (min-width: 1001px) {
@@ -827,7 +824,11 @@ table.params {
     }
   }
 
-  .subsection-title, .section-examples, .section-method > *:not(.params):not(.description), .description > *, footer {
+  .subsection-title,
+  .section-examples,
+  .section-method > *:not(.params):not(.description),
+  .description > *,
+  footer {
     margin-right: 50%;
   }
 
@@ -858,16 +859,20 @@ table.params {
   .code-col-bg {
     position: fixed;
     right: 0;
-    width: calc(50% - 250px / 2);
+    width: calc(50% - #{$nav-width} / 2);
     height: 100%;
     background-color: #333;
   }
 
   footer {
     position: relative;
-    margin-left: 250px;
-    margin-right: calc(50% - 250px / 2);
+    margin-left: $nav-width;
+    margin-right: calc(50% - #{$nav-width} / 2);
     border: none;
     clear: right;
   }
 }
+
+/* make comments more legible */
+.prettyprint .com, /* Comment.Multiline */
+{ color: #7699b2 }
