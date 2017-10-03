@@ -4,7 +4,9 @@
   "description": "JSDoc 3 Template / Theme inspired by slate",
   "main": "publish.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node-sass --watch  --recursive scss --output static/styles/",
+    "build": "node-sass --update --recursive scss --output static/styles/",
+    "install": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -21,5 +23,7 @@
     }
   ],
   "homepage": "https://github.com/taye/jsdoc-stale",
-  "dependencies": {}
+  "dependencies": {
+    "node-sass": "^4.5.3"
+  }
 }
