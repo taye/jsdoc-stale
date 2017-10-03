@@ -635,7 +635,7 @@ dl.param-type {
   border-bottom: 1px solid #eee;
 }
 
-@media only screen and (min-width: 320px) and (max-width: 680px) {
+@media only screen and (max-width: 700px) {
   body {
     overflow-x: hidden;
   }
@@ -699,24 +699,68 @@ dl.param-type {
 #main {
   padding-left: 0;
   padding-right: 0;
+	min-width: initial;
 }
 
-#main > section {
-  background-color: transparent;
-}
-
-#main > *:not(section):not(.code-col-bg),
+#main > *:not(section),
+section > header,
 .subsection-title,
-.section-method > *:not(.section-examples):not(.params),
+.section-method > *:not(.params):not(.description):not(.prettyprint),
+.description > *:not(.prettyprint),
 footer {
-  margin-right: 50%;
   padding-left: 10px;
   padding-right: 10px;
 }
 
 table.params {
   width: auto;
+  margin: 0 10px;
+}
+
+.prettyprint.source,
+#main blockquote {
+  width: 100%;
+}
+
+.prettyprint,
+.prettyprint > code,
+#main blockquote {
+  position: relative;
+  border: none;
+  border-radius: 0;
+	width: 100%;
+}
+
+.prettyprint,
+.prettyprint code,
+#main blockquote {
+  background-color: #292929;
+  color: #c5c8c6;
+	border-radius: 0;
+}
+
+.navicon, .navicon-button {
+	transition: none;
+}
+
+@media only screen and (min-width: 1001px) {
+
+#main > section {
+  background-color: transparent;
+}
+
+#main > *:not(section),
+.subsection-title,
+.section-examples,
+.section-method > *:not(.params):not(.description),
+.description > *,
+footer {
+  margin-right: 50%;
+}
+
+table.params {
   margin: 0 calc(50% + 10px) 0 10px;
+	min-width: 200px;
 }
 
 .section-method > h1,
@@ -724,28 +768,12 @@ table.params {
   clear: both;
 }
 
-.section-examples,
-.prettyprint.source,
-#main blockquote {
-  position: relative;
+.description > .prettyprint.source,
+.description > blockquote {
   width: 50%;
   margin: 0 0 10px;
   float: right;
   clear: right;
-}
-
-.prettyprint,
-.prettyprint > code,
-#main blockquote {
-  border: none;
-  border-radius: 0;
-  background-color: transparent;
-}
-
-.prettyprint,
-#main blockquote {
-  background-color: rgba(0, 0, 0, 0.375);
-  color: #c5c8c6;
 }
 
 .prettyprint > code {
