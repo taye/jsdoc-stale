@@ -5,6 +5,10 @@ var self = this;
 <div class="section-members">
 <h4 class="name" id="<?js= id ?>"><?js= data.attribs + name + (data.signature ? data.signature : '') ?></h4>
 
+<?js if (data.examples && examples.length) { ?>
+    <?js= this.partial('examples.tmpl', examples) ?>
+<?js } ?>
+
 <?js if (data.summary) { ?>
 <p class="summary"><?js= summary ?></p>
 <?js } ?>
@@ -31,10 +35,5 @@ var self = this;
     <ul><?js fires.forEach(function(f) { ?>
         <li><?js= self.linkto(f) ?></li>
     <?js }); ?></ul>
-<?js } ?>
-
-<?js if (data.examples && examples.length) { ?>
-    <h5>Example<?js= examples.length > 1? 's':'' ?></h5>
-    <?js= this.partial('examples.tmpl', examples) ?>
 <?js } ?>
 </div>

@@ -690,3 +690,80 @@ dl.param-type {
     width: 100%;
   }
 }
+
+
+
+
+/* additions to minami css */
+
+#main {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#main > section {
+  background-color: transparent;
+}
+
+#main > *:not(section):not(.code-col-bg),
+.subsection-title,
+.section-method > *:not(.section-examples):not(.params),
+footer {
+  margin-right: 50%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+table.params {
+  width: auto;
+  margin: 0 calc(50% + 10px) 0 10px;
+}
+
+.section-method > h1,
+.section-method > h2 {
+  clear: both;
+}
+
+.section-examples,
+.prettyprint.source,
+#main blockquote {
+  position: relative;
+  width: 50%;
+  margin: 0 0 10px;
+  float: right;
+  clear: right;
+}
+
+.prettyprint,
+.prettyprint > code,
+#main blockquote {
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.prettyprint,
+#main blockquote {
+  background-color: rgba(0, 0, 0, 0.375);
+  color: #c5c8c6;
+}
+
+.prettyprint > code {
+  white-space: pre-wrap;
+}
+
+.code-col-bg {
+  position: fixed;
+  right: 0;
+  width: calc(50% - 250px / 2);
+  height: 100%;
+  background-color: #333;
+}
+
+footer {
+  position: relative;
+  margin-left: 250px;
+  margin-right: calc(50% - 250px / 2);
+  border: none;
+  clear: right;
+}

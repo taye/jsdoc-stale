@@ -2,6 +2,13 @@
 var data = obj;
 var self = this;
 ?>
+
+<?js if (data.examples && examples.length) { ?>
+<div class="section-examples">
+<?js= this.partial('examples.tmpl', examples) ?>
+</div>
+<?js } ?>
+
 <div class="section-method">
 <?js if (data.kind !== 'module') { ?>
     <?js if (data.kind === 'class' && data.classdesc) { ?>
@@ -105,13 +112,6 @@ var self = this;
     returns.forEach(function(r) { ?>
         <?js= self.partial('returns.tmpl', r) ?>
     <?js }); } ?>
-</div>
-<?js } ?>
-
-<?js if (data.examples && examples.length) { ?>
-<div class="section-examples">
-<h5>Example<?js= examples.length > 1? 's':'' ?></h5>
-<?js= this.partial('examples.tmpl', examples) ?>
 </div>
 <?js } ?>
 </div>
