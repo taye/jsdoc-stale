@@ -27,11 +27,17 @@ module.exports = {
     const articles = {};
 
     for (const filename of filenames) {
-      const source = fs.readFileSync(path.join(confBase, filename)).toString();
+      let source = fs.readFileSync(path.join(confBase, filename)).toString();
       const name = filename.replace(/(^[./]+)|([.][^.]*$)/g, '');
 
       const titleLine = source.match(/^[#\r\n]*(.+)([\r\n]|$)/);
       const title = titleLine ? titleLine[1].trim() : name;
+
+      // the template layout adds the title to the html documetn so remove it
+      // from the source
+      if (titleLine) {
+        source = source.substr(titleLine[0].length);
+      }
 
       const article = {
         source,
