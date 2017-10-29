@@ -1,0 +1,22 @@
+@import config
+
+.hover-card
+  @extend .box
+
+  position: fixed
+  top: 0
+  left: 0
+  max-width: 80 * $grid
+  overflow: scroll
+
+.red
+  color: red
+
+.underline
+  text-decoration: underline
+
+.red.underline
+  background-color: green
+
+.hover-card
+  @extend .red.underline
