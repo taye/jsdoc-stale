@@ -349,6 +349,7 @@ function buildNav(members) {
 
   nav.push(buildNavLink('home', '<a href="index.html">Home</a>'))
 
+  nav = nav.concat(buildMemberNav(members.articles, "Articles", {}, linkto))
   nav = nav.concat(buildMemberNav(members.tutorials, "Tutorials", seenTutorials, linktoTutorial))
   nav = nav.concat(buildMemberNav(members.classes, "Classes", seen, linkto))
   nav = nav.concat(buildMemberNav(members.modules, "Modules", {}, linkto))
