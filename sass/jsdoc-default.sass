@@ -42,6 +42,7 @@ h1, h2, h3, h4, h5, h6
   color: #000
   font-weight: 400
   margin: 0
+  line-height: initial
 
 h1
   font-weight: 300
@@ -97,7 +98,7 @@ tt, code, kbd, samp
   background: #f4f4f4
   padding: 1px 5px
   border-radius: 5px
-  font-size: 14px
+  font-size: 0.875em
 
 blockquote
   display: block
@@ -124,9 +125,10 @@ blockquote
   padding: 0
   min-width: initial
 
-  > *:not(section)
-    padding-left: 10px
-    padding-right: 10px
+  &, & .article
+    > *:not(section,ol,ul)
+      padding-left: 10px
+      padding-right: 10px
 
 header
   display: block
@@ -661,7 +663,6 @@ table.params
   position: relative
   border: none
   border-radius: 0
-  width: 100%
   background-color: #292929
   color: #c5c8c6
   border-radius: 0
@@ -689,12 +690,13 @@ table.params
     h1, h2
       clear: both
 
-  .description >
-    .prettyprint.source, blockquote
-      width: 50%
-      margin: 0 0 10px
-      float: right
-      clear: right
+  #main
+    .description, .article >
+      .prettyprint.source, blockquote
+        width: 50%
+        margin: 0 0 10px
+        float: right
+        clear: right
 
   .prettyprint > code
     white-space: pre-wrap
