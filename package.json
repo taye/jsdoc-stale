@@ -2,11 +2,14 @@
   "name": "jsdoc-stale",
   "version": "0.0.0",
   "description": "JSDoc 3 Template / Theme inspired by slate",
-  "main": "publish.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node-sass --watch  --recursive scss --output static/styles/",
-    "build": "node-sass --update --recursive scss --output static/styles/",
-    "install": "npm run build"
+    "start": "npm run _sass -- --watch",
+    "build": "npm run _sass -- --update",
+    "docs": "jsdoc -c jsdoc.conf.js",
+    "_sass": "node-sass --sourcemap=inline --recursive sass --output static/styles/",
+    "install": "npm run build",
+    "postinstall": "ln -sf ./lib/jsdoc/util ./node_modules/jsdoc/util"
   },
   "repository": {
     "type": "git",
@@ -24,6 +27,15 @@
   ],
   "homepage": "https://github.com/taye/jsdoc-stale",
   "dependencies": {
-    "node-sass": "^4.5.3"
+    "node-sass": "^4.5.3",
+    "superagent": "^3.6.3",
+    "walk-sync": "^0.3.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.1",
+    "babel-preset-es2015": "^6.24.1",
+    "bulma": "^0.5.3",
+    "eslint": "^3.19.0",
+    "jsdoc": "^3.5.5"
   }
 }

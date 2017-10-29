@@ -1,42 +1,21 @@
 # jsdoc-stale
 
-A clean, responsive documentation template theme for JSDoc 3 inspired by slate
-and minimi.
+A clean, responsive documentation template theme for JSDoc 3 inspired by
+[slate](https://github.com/lord/slate) and based on
+[minami](https://github.com/nijikokun/minami).
 
 ![jsdoc-stale Screenshot](preview.png)
 
 
-## Uses
-
-- [the Taffy Database library](http://taffydb.com/)
-- [Underscore Template library](http://underscorejs.org/#template)
-
-
 ## Install
 
-```bash
-$ npm install --save-dev minami
+With npm:
+
+```sh
+$ npm install --save-dev jsdoc git+https://git@github.com/taye/jsdoc-stale
 ```
 
-
-## Usage
-
-Clone repository to your designated `jsdoc` template directory, then:
-
-```bash
-$ jsdoc entry-file.js -t path/to/jsdoc-stale
-```
-
-
-### Node.js Dependency
-
-In your projects `package.json` file add a generate script:
-
-```json
-"script": {
-  "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
-}
-```
+## configure jsdoc
 
 In your `.jsdoc.json` file, add a template option.
 
@@ -44,6 +23,12 @@ In your `.jsdoc.json` file, add a template option.
 "opts": {
   "template": "node_modules/jsdoc-stale"
 }
+```
+
+## generate
+
+```bash
+$ jsdoc -c .jsdoc.json entry-file.js
 ```
 
 
