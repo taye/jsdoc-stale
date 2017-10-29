@@ -7,6 +7,7 @@
     "start": "npm run _sass -- --watch",
     "build": "npm run _sass -- --update",
     "docs": "rm -rf dist/docs; cd docs; jsdoc -c jsdoc.conf.js",
+    "debug": "rm -rf dist/docs; cd docs; node --inspect-brk ../node_modules/.bin/jsdoc -c jsdoc.conf.js",
     "_sass": "node-sass --sourcemap=inline --recursive sass --output static/styles/",
     "install": "npm run build",
     "postinstall": "ln -sf ./lib/jsdoc/util ./node_modules/jsdoc/util"
