@@ -1,5 +1,5 @@
-/*
- * @module
+/**
+ * @module publish
  */
 
 /*global env: true */
