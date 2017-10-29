@@ -36,6 +36,6 @@
     "babel-preset-es2015": "^6.24.1",
     "bulma": "^0.5.3",
     "eslint": "^3.19.0",
-    "jsdoc": "^3.5.5"
+    "jsdoc": "taye/jsdoc#feat-conf-templates-baseUrl"
   }
 }
