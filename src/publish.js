@@ -846,6 +846,8 @@ exports.publish = function(taffyData, opts, tutorials) {
 
   function writeArticle(doclet) {
     const articlePath = path.join(outdir, doclet.outfilename);
+    doclet.content = doclet.description;
+
     var html = helper.resolveLinks(view.render("article.tmpl", doclet));
 
     mkdirp.sync(path.dirname(articlePath));

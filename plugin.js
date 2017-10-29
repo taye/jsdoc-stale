@@ -1,38 +1,29 @@
-const { getArticles, renderArticles } = require('./src/articles');
+const { getArticlePaths, createArticle } = require('./src/articles');
 
 // { filename: { source, name, outFile, ... }, }
-let _articles = null;
-let _doclets;
+let isArticleFile = null;
 
 module.exports = {
 
   handlers: {
     parseBegin: (event) => {
-      _articles = getArticles();
-      _doclets = [];
+      const filenames = getArticlePaths();
 
-      for (const filename in _articles) {
+      isArticleFile = {};
+
+      for (const filename of filenames) {
         event.sourcefiles.push(filename);
+        isArticleFile[filename] = true;
       }
     },
 
     beforeParse: (event) => {
-      if (!_articles[event.filename]) {
+      if (!isArticleFile[event.filename]) {
         return;
       }
 
       // TODO: make a doclet for each heading in the article
       event.source = `/** @article ${event.filename} **/`;
-    },
-
-    parseComplete: () => {
-      renderArticles({
-        articles: _articles,
-      });
-
-      for (const doclet of _doclets) {
-        doclet.content = _articles[doclet.filename].content;
-      }
     },
   },
 
@@ -42,10 +33,10 @@ module.exports = {
   defineTags: dictionary => {
     dictionary.defineTag('article', {
       onTagged: (doclet, tag) => {
-        doclet.kind = 'article';
-        Object.assign(doclet, _articles[tag.text]);
+        const filename = tag.text;
 
-        _doclets.push(doclet);
+        doclet.kind = 'article';
+        Object.assign(doclet, createArticle(filename));
       },
     });
   },

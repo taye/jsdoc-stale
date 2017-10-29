@@ -19,43 +19,38 @@ const dest = path.normalize(jsdocEnv.opts.destination);
 
 module.exports = {
   /**
-   * Get the list of articles and register links for them
+   * get the props for an article doclet including source and longname, then
+   * register a link
    */
-  getArticles () {
-    const filenames = module.exports.getArticlePaths(confBase)
-      .map(filename => path.relative(confBase, filename));
-    const articles = {};
+  createArticle (filename) {
+    filename = path.relative(confBase, filename);
 
-    for (const filename of filenames) {
-      let source = fs.readFileSync(path.join(confBase, filename)).toString();
-      const name = filename.replace(/(^[./]+)|([.][^.]*$)/g, '');
+    let source = fs.readFileSync(path.join(confBase, filename)).toString();
+    const name = filename.replace(/(^[./]+)|([.][^.]*$)/g, '');
 
-      const titleLine = source.match(/^[#\r\n]*(.+)([\r\n]|$)/);
-      const title = titleLine ? titleLine[1].trim() : name;
+    const titleLine = source.match(/^[#\r\n]*(.+)([\r\n]|$)/);
+    const title = titleLine ? titleLine[1].trim() : name;
 
-      // the template layout adds the title to the html documetn so remove it
-      // from the source
-      if (titleLine) {
-        source = source.substr(titleLine[0].length);
-      }
-
-      const article = {
-        source,
-        name,
-        filename,
-        title,
-        longname: `article:${name}`,
-        content: null,
-        outfilename: `${name}.html`,
-        kind: 'article',
-      };
-
-      templateHelper.registerLink(article.longname, article.outfilename);
-
-      articles[filename] = article;
+    // the template layout adds the title to the html documetn so remove it
+    // from the source
+    if (titleLine) {
+      source = source.substr(titleLine[0].length);
     }
 
-    return articles;
+    const article = {
+      source,
+      name,
+      filename,
+      title,
+      longname: `article:${name}`,
+      description: source,
+      outfilename: `${name}.html`,
+      kind: 'article',
+    };
+
+    templateHelper.registerLink(article.longname, article.outfilename);
+
+    return article;
   },
 
   /**
@@ -86,8 +81,11 @@ module.exports = {
     }
   },
 
-  getArticlePaths (root) {
-    let globs = jsdocEnv.conf.articles || ['./**/*.md', '**/*.markdown'];
+  /**
+   * Get an array of article filenames relative to the config file directory
+   */
+  getArticlePaths (root = confBase) {
+    let globs = jsdocEnv.conf.articles || ['**/*.md', '**/*.markdown', '**/*.html'];
     let ignore = (jsdocEnv.conf.source.excludePaths || []).concat(['**/node_modules/**']);
 
     if (typeof globs === 'string') {
@@ -108,6 +106,6 @@ module.exports = {
       directories: false,
     });
 
-    return filenames;
+    return filenames.map(filename => path.relative(confBase, filename));
   },
 };
