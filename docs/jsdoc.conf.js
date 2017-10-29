@@ -1,6 +1,6 @@
 module.exports = {
   source: {
-    include: ['../src'],
+    include: ['../src', '../plugin.js'],
   },
 
   opts: {

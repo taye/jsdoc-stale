@@ -1,8 +1,4 @@
 /**
- * This JSDoc plugin allows Markdown articles to be generated and
- * linked to in JSDoc comments. {@link article:index This article} is
- * an example.
- *
  * @module articles
  */
 const fs= require('fs');
@@ -54,12 +50,12 @@ module.exports = {
   },
 
   /**
-   * Render article markdown and optionally resolve
-   * links and write output
-   *
    * ```js
    * renderArticles{ articles: [], writeOutput: true, resolveLinks: true });
    * ```
+   *
+   * Render article markdown and optionally resolve
+   * links and write output
    */
   renderArticles ({ articles, writeOutput = false, resolveLinks = false }) {
     for (const filename in articles) {

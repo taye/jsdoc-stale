@@ -13,3 +13,6 @@ console.log(href);
 ```
 
 > This is some text in a quote!
+
+{@link article:space in file name|Here is a link} to a file with spaces in the name?
+

@@ -1,3 +1,11 @@
+/**
+ * This JSDoc plugin allows Markdown articles to be generated and
+ * linked to in JSDoc comments. {@link article:index This article} is
+ * an example.
+ *
+ * @module plugin
+ */
+
 const { getArticlePaths, createArticle } = require('./src/articles');
 
 // { filename: { source, name, outFile, ... }, }
@@ -5,7 +13,13 @@ let isArticleFile = null;
 
 module.exports = {
 
+  /**
+   * handlers called on JSDoc parse events
+   */
   handlers: {
+    /**
+     * search for articles and push them onto jsdoc's list of sourcefiles
+     */
     parseBegin: (event) => {
       const filenames = getArticlePaths();
 
@@ -17,6 +31,10 @@ module.exports = {
       }
     },
 
+    /**
+     * replace article sources with a single @article tag with the filename as
+     * the tag value
+    */
     beforeParse: (event) => {
       if (!isArticleFile[event.filename]) {
         return;
@@ -28,7 +46,7 @@ module.exports = {
   },
 
   /**
-   * define the @article tag
+   * define the `@article` tag
    */
   defineTags: dictionary => {
     dictionary.defineTag('article', {
