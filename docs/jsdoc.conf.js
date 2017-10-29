@@ -1,17 +1,17 @@
 module.exports = {
   source: {
-    include: ['src'],
+    include: ['../src'],
   },
 
   opts: {
-    destination: './dist/docs/',
+    destination: '../dist/docs/',
     recurse: true,
-    template: './',
+    template: '../',
   },
 
   plugins: [
     'plugins/markdown',
-    './',
+    '../',
   ],
 
   articles: [

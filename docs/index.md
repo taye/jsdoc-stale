@@ -2,5 +2,5 @@
 
 It links to itself:
 
- 1. {@link article:examples/index}
- 2. {@link article:examples/index link with some text}
+ 1. {@link article:index}
+ 2. {@link article:index link with some text}
