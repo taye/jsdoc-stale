@@ -6,6 +6,11 @@
  * @module plugin
  */
 
+const jsdocEnv = require('jsdoc/env');
+
+// set the JSDoc template
+jsdocEnv.conf.opts.template = jsdocEnv.opts.template = __dirname;
+
 const { getArticlePaths, createArticle } = require('./src/articles');
 
 // { filename: { source, name, outFile, ... }, }

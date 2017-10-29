@@ -6,7 +6,8 @@ module.exports = {
   opts: {
     destination: '../dist/docs/',
     recurse: true,
-    template: '../',
+    // template is set by the plugin
+    // template: '../',
   },
 
   plugins: [
