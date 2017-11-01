@@ -671,19 +671,30 @@ table.params
   border-radius: 0
 
 @media only screen and (min-width: 1001px)
+  %pull-left
+    width: 50%
+    margin-right: 50%
+
+  %pull-right
+    width: 50%
+    margin: 0 0 10px
+    float: right
+    clear: right
+
   #main >
     section
       background-color: transparent
 
     *:not(section)
-      margin-right: 50%
+      @extend %pull-left
 
   .subsection-title,
   .section-examples,
   .section-method > *:not(.params):not(.description),
   .description > *,
+  .article > *,
   footer
-    margin-right: 50%
+    @extend %pull-left
 
   table.params
     margin: 0 calc(50% + 10px) 0 10px
@@ -696,10 +707,7 @@ table.params
   #main
     .description, .article >
       .prettyprint.source, blockquote
-        width: 50%
-        margin: 0 0 10px
-        float: right
-        clear: right
+        @extend %pull-right
 
   .prettyprint > code
     white-space: pre-wrap
