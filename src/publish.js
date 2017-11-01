@@ -347,9 +347,13 @@ function buildNav(members) {
   var seen = {}
   var seenTutorials = {}
 
-  nav.push(buildNavLink('home', '<a href="index.html">Home</a>'))
+  nav.push(buildNavLink('home', `<a href="${env.conf.templates.baseUrl}index.html">Home</a>`))
 
-  nav = nav.concat(buildMemberNav(members.articles, "Articles", {}, linkto))
+  // the Home link already covers the index article
+  const articles = members.articles.filter(article =>
+    article.name !== 'index');
+
+  nav = nav.concat(buildMemberNav(articles, '', {}, linkto))
   nav = nav.concat(buildMemberNav(members.tutorials, "Tutorials", seenTutorials, linktoTutorial))
   nav = nav.concat(buildMemberNav(members.classes, "Classes", seen, linkto))
   nav = nav.concat(buildMemberNav(members.modules, "Modules", {}, linkto))
@@ -383,7 +387,9 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
   if (items && items.length) {
     var itemsNav = ""
 
-    nav.push(buildNavHeading(itemHeading))
+    if (itemHeading) {
+      nav.push(buildNavHeading(itemHeading));
+    }
 
     items.forEach(function(item) {
       var methods = find({ kind: "function", memberof: item.longname })
@@ -407,7 +413,7 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
             }
           }
         } else {
-          displayName = item.name
+          displayName = item.title || item.name;
         }
 
         displayName = displayName.replace(/^module:/g, "")
