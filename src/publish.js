@@ -218,10 +218,10 @@ function addAttribs(f) {
   )
 }
 
-function shortenPaths(files, commonPrefix) {
+function shortenPaths(files, baseDir) {
   Object.keys(files).forEach(function(file) {
     files[file].shortened = files[file].resolved
-      .replace(commonPrefix, "")
+      .replace(baseDir, "")
       // always use forward slashes
       .replace(/\\/g, "/")
   })
@@ -648,7 +648,9 @@ exports.publish = function(taffyData, opts, tutorials) {
   }
 
   if (sourceFilePaths.length) {
-    sourceFiles = shortenPaths(sourceFiles, path.commonPrefix(sourceFilePaths))
+    const baseDir = env.conf.templates.baseDir || path.commonPrefix(sourceFilePaths);
+
+    sourceFiles = shortenPaths(sourceFiles, baseDir);
   }
 
   data().each(function(doclet) {
