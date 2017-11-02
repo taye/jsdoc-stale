@@ -6,6 +6,8 @@
  * @module plugin
  */
 
+const path = require('path');
+
 const jsdocEnv = require('jsdoc/env');
 
 // set the JSDoc template
@@ -31,7 +33,7 @@ module.exports = {
       isArticleFile = {};
 
       for (const filename of filenames) {
-        event.sourcefiles.push(filename);
+        event.sourcefiles.push(path.resolve(filename));
         isArticleFile[filename] = true;
       }
     },

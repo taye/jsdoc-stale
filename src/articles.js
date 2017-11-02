@@ -10,7 +10,7 @@ const jsdocEnv = require('jsdoc/env');
 const parseMd = require('jsdoc/util/markdown').getParser();
 const templateHelper = require('jsdoc/util/templateHelper');
 
-const confBase = path.dirname(path.relative(jsdocEnv.pwd, jsdocEnv.opts.configure));
+const confBase = path.dirname(path.resolve(path.relative(jsdocEnv.pwd, jsdocEnv.opts.configure)));
 const dest = path.normalize(jsdocEnv.opts.destination);
 
 module.exports = {
@@ -102,6 +102,6 @@ module.exports = {
       directories: false,
     });
 
-    return filenames.map(filename => path.relative(confBase, filename));
+    return filenames.map(filename => path.join(confBase, filename));
   },
 };
