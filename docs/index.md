@@ -16,3 +16,6 @@ console.log(href);
 
 {@link article:space in file name|Here is a link} to a file with spaces in the name?
 
+```raw
+this is in some fence
+```

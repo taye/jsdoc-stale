@@ -127,8 +127,8 @@ blockquote
 
   &, & .article
     > *:not(section,ol,ul)
-      padding-left: 10px
-      padding-right: 10px
+      padding-left: $main-padding
+      padding-right: $main-padding
 
 header
   display: block
@@ -351,7 +351,6 @@ footer
     font-size: 12px
     line-height: 18px
     display: block
-    background-color: #eee
     color: #4D4E53
 
     &:empty:before
@@ -381,13 +380,10 @@ footer
       padding-left: 0
 
     li
-      border-left: 3px #ddd solid
+      border-left: 2px #444 solid
 
       &.selected
-        background-color: lightyellow
-
-        *
-          background-color: lightyellow
+        background-color: #555
 
       *
         -webkit-user-select: text
@@ -631,11 +627,12 @@ dl.param-type
 
 section > header,
 .subsection-title,
-.section-method > *:not(.params):not(.description):not(.prettyprint),
-.description > *:not(.prettyprint),
+.section-method > *:not(.params, .description, .prettyprint, ol, ul),
+.description > *:not(.prettyprint, ol, ul),
 footer
-  padding-left: 10px
-  padding-right: 10px
+  padding-left: $main-padding
+  padding-right: $main-padding
+  margin: 0
 
 table.params
   width: auto
@@ -653,12 +650,12 @@ table.params
   color: #c5c8c6
   border-radius: 0
 
-  > code
+  code
     position: relative
     border: none
     border-radius: 0
     width: 100%
-    background-color: #292929
+    background-color: transparent
     color: #c5c8c6
     border-radius: 0
 
@@ -672,8 +669,8 @@ table.params
 
 @media only screen and (min-width: 1001px)
   %pull-left
-    width: 50%
-    margin-right: 50%
+    width: calc(50% - #{$main-padding})
+    margin-right: calc(50% + #{$main-padding})
 
   %pull-right
     width: 50%
@@ -681,12 +678,16 @@ table.params
     float: right
     clear: right
 
-  #main >
-    section
-      background-color: transparent
+  #main
+    >
+      section
+        background-color: transparent
 
-    *:not(section)
-      @extend %pull-left
+      *:not(section)
+        @extend %pull-left
+
+    .prettyprint:not(.source)
+        @extend %pull-left
 
   .subsection-title,
   .section-examples,
