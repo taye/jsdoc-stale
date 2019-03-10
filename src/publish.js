@@ -509,11 +509,17 @@ function buildNavType (type, typeLink) {
 }
 
 function generateApiJson (data) {
-  //console.log(data);
+  var outpath = path.join(outdir, require('path').relative(process.cwd(), 'doclets.json'));
 
-  var outpath = path.join(outdir, 'doclets.json');
+  data = JSON.parse(data.stringify());
 
-  fs.writeFileSync(outpath, data.stringify(), "utf8")
+  data.forEach(d => {
+    if (d.meta && d.meta.path) {
+      d.meta.path = require('path').relative(process.cwd(), d.meta.path)
+    }
+  })
+
+  fs.writeFileSync(outpath, JSON.stringify(data), "utf8")
 }
 
 /**
