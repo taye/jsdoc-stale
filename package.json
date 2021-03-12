@@ -8,7 +8,7 @@
     "build": "npm run _sass -- --update; npm run docs",
     "docs": "rm -rf dist/docs; cd docs; jsdoc -c jsdoc.conf.js",
     "debug": "rm -rf dist/docs; cd docs; node --inspect-brk ../node_modules/.bin/jsdoc -c jsdoc.conf.js",
-    "_sass": "node link-sass.js; node-sass --sourcemap=inline --recursive sass --output static/styles/",
+    "_sass": "node link-sass.js; sass --embed-sources --embed-source-map sass/jsdoc-default.sass:static/styles/jsdoc-default.css",
     "postinstall": "npm run _sass"
   },
   "repository": {
@@ -28,17 +28,14 @@
   "homepage": "https://github.com/taye/jsdoc-stale",
   "dependencies": {
     "bulma": "^0.5.3",
+    "sass": "^1.32.8",
     "superagent": "^3.8.3",
     "walk-sync": "^0.3.4"
-  },
-  "peerDependencies": {
-    "node-sass": "~4"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
     "babel-preset-es2015": "^6.24.1",
     "eslint": "^3.19.0",
-    "jsdoc": "github:taye/jsdoc#feat-conf-templates-baseUrl",
-    "node-sass": "~4"
+    "jsdoc": "github:taye/jsdoc#feat-conf-templates-baseUrl"
   }
 }
